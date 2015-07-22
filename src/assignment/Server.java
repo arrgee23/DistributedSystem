@@ -10,10 +10,11 @@ import java.util.Hashtable;
 
 public class Server extends Thread
 {
-	private static final int BASE_SOCKET = 10000;
+	private static final int BASE_SOCKET = 10090;
     private ServerSocket serverSocket;
     Hashtable<Integer,Integer> table;
-   public Server(int port) throws IOException
+   
+    public Server(int port) throws IOException
    {
       serverSocket = new ServerSocket(port);
       serverSocket.setSoTimeout(1000000);
@@ -67,8 +68,15 @@ public class Server extends Thread
       int port = BASE_SOCKET;
       try
       {
-         Thread t = new Server(port);
-         t.start();
+         Thread t0 = new Server(port);
+         Thread t1 = new Server(port+1);
+         Thread t2 = new Server(port+2);
+         Thread t3 = new Server(port+3);
+         t1.start();
+         t2.start();
+         t3.start();
+         t0.start();
+      
       }catch(IOException e)
       {
          e.printStackTrace();
