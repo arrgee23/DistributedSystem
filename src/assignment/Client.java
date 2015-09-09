@@ -9,7 +9,7 @@ import java.net.Socket;
 
 public class Client {
 	static final String serverName = "localhost";
-	private static final int BASE_SOCKET = 10090;
+	private static final int BASE_SOCKET = 20000;
 	
 	public static void putUtil(int v,int port){
 		try
@@ -72,9 +72,9 @@ public class Client {
 		return getUtil(k,BASE_SOCKET+k%4);
 	}
 	public static void main(String[] args) {
-		put(3);
+		put(3);put(4);
 		System.out.println(get(3));
-		put(4);
+		
 		System.out.println(get(4));
 	}
 	      
