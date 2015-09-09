@@ -8,9 +8,9 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.util.Hashtable;
 
-public class Server extends Thread
+public class Server // extends Thread
 {
-	private static final int BASE_SOCKET = 10090;
+	private static final int BASE_SOCKET = 20000;
     private ServerSocket serverSocket;
     Hashtable<Integer,Integer> table;
    
@@ -21,7 +21,7 @@ public class Server extends Thread
       table = new Hashtable<Integer,Integer>();
    }
 
-   public void run()
+   public void isstart()
    {
       while(true)
       {
@@ -65,17 +65,19 @@ public class Server extends Thread
    }
    public static void main(String [] args)
    {
-      int port = BASE_SOCKET;
+      int port = BASE_SOCKET+Integer.parseInt(args[0]);
+      System.out.print("Stareted Server at port: "+port);
       try
       {
-         Thread t0 = new Server(port);
-         Thread t1 = new Server(port+1);
+         Server s = new Server(port);
+        /* Thread t1 = new Server(port+1);
          Thread t2 = new Server(port+2);
-         Thread t3 = new Server(port+3);
-         t1.start();
-         t2.start();
-         t3.start();
-         t0.start();
+         Thread t3 = new Server(port+3);*/
+         
+         s.isstart();
+         /*t2.isstart();
+         t3.isstart();
+         t0.isstart();*/
       
       }catch(IOException e)
       {
