@@ -77,7 +77,8 @@ public class Client extends Thread{
 		while(true){
 			//System.out.println("looping");
 			String str = s.nextLine();
-			String method ;	//= str.substring(0,3);			
+			String method ;
+			
 			int n;
 			
 			try{
