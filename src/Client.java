@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Client extends Thread{
 	static final String serverName = "localhost";
 	private static final int BASE_SOCKET = 20000;
-	
+	private static final int NO_OF_TERMINALS = 4;
 	public static void putUtil(int v,int port){
 		try
 	      {
@@ -59,16 +59,16 @@ public class Client extends Thread{
 	      {
 	    	  System.out.println("Connection to port "+port+" was unsuccessful.Make sure the node is UP."+"\n");
 	    	  //e.printStackTrace();
-	    	  return -1;
+	    	  return ret;
 	      }
 		return ret;
 	}
 	public static void put(int v){
-		putUtil(v,BASE_SOCKET+ v%4);
+		putUtil(v,BASE_SOCKET + Math.abs(v)%NO_OF_TERMINALS);
 	}
 	
 	public static int get(int k){
-		return getUtil(k,BASE_SOCKET+k%4);
+		return getUtil(k,BASE_SOCKET + Math.abs(k)%NO_OF_TERMINALS);
 	}
 	
 	
@@ -76,16 +76,16 @@ public class Client extends Thread{
 		Scanner s = new Scanner(System.in);
 		while(true){
 			//System.out.println("looping");
-			String str = s.next();
+			String str = s.nextLine();
 			String method ;	//= str.substring(0,3);			
 			int n;
 			
 			try{
 				method = str.substring(0,3); 
-				n= Integer.parseInt(str.substring(3,str.length()));
+				n= Integer.parseInt(str.substring(4,str.length()));
 			}
 			catch(Exception e){
-				System.out.println("Wrong input format."+"Usage: put/get <number>");
+				System.out.println("Wrong input format\n"+"Usage: put/get <integer_number>");
 				continue;
 			}
 			
@@ -94,8 +94,8 @@ public class Client extends Thread{
 				put(n);
 			else{
 				int k = get(n);
-				if(k!=-1)
-				System.out.println("got :"+k);
+				if(k!= Integer.MIN_VALUE)
+					System.out.println("got: "+k);
 				else
 					System.out.println("NOT FOUND");
 
