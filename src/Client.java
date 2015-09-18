@@ -1,4 +1,4 @@
-//package assignment;
+
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -22,14 +22,16 @@ public class Client extends Thread{
 	         out.writeUTF("put"+v);
 	         
 	         
-	         System.out.println("written(in client): " + v);
+	         System.out.println("written(in DHT): " + v);
 	         
 	         out.close();
 	         client.close();
 	      }catch(IOException e)
 	      {
-	         e.printStackTrace();
+	    	  System.out.println("Connection to port "+port+" was unsuccessful.Make sure the node is UP."+"\n");
+	    	  //e.printStackTrace();
 	      }
+		
 	   }
 
 	public static int getUtil(int v,int port){
@@ -55,7 +57,9 @@ public class Client extends Thread{
 	         client.close();
 	      }catch(IOException e)
 	      {
-	         e.printStackTrace();
+	    	  System.out.println("Connection to port "+port+" was unsuccessful.Make sure the node is UP."+"\n");
+	    	  //e.printStackTrace();
+	    	  return -1;
 	      }
 		return ret;
 	}
@@ -71,9 +75,20 @@ public class Client extends Thread{
 	public void run(){
 		Scanner s = new Scanner(System.in);
 		while(true){
+			//System.out.println("looping");
 			String str = s.next();
-			String method = str.substring(0,3);
-			int n = Integer.parseInt(str.substring(3,str.length()));
+			String method ;	//= str.substring(0,3);			
+			int n;
+			
+			try{
+				method = str.substring(0,3); 
+				n= Integer.parseInt(str.substring(3,str.length()));
+			}
+			catch(Exception e){
+				System.out.println("Wrong input format."+"Usage: put/get <number>");
+				continue;
+			}
+			
 
 			if(method.equals("put"))
 				put(n);
@@ -82,7 +97,7 @@ public class Client extends Thread{
 				if(k!=-1)
 				System.out.println("got :"+k);
 				else
-					System.out.println("NOT Found");
+					System.out.println("NOT FOUND");
 
 			}
 		}

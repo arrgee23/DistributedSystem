@@ -27,19 +27,17 @@ public class Server // extends Thread
 		while (true) {
 			try {
 				Socket server = serverSocket.accept();
-				DataInputStream in = new DataInputStream(
-						server.getInputStream());
-				DataOutputStream out = new DataOutputStream(
-						server.getOutputStream());
+				DataInputStream in = new DataInputStream(server.getInputStream());
+				
+				DataOutputStream out = new DataOutputStream(server.getOutputStream());
 				
 				String incoming = in.readUTF();
-				
-				
+						
 				
 				// first 3 letters are always put or get
 				String method = incoming.substring(0, 3);
-				int value = Integer.parseInt(incoming.substring(3,
-						incoming.length()));
+				int value = Integer.parseInt(incoming.substring(3,incoming.length()));
+				
 				System.out.println("Just received " + incoming);
 
 				if (method.equals("put")) {
@@ -55,7 +53,7 @@ public class Server // extends Thread
 					}
 
 					catch (Exception e) {
-						System.out.println("Data not found in table");
+						System.out.println("Data not found in DHT");
 						out.writeUTF("-1");
 						out.close();
 						in.close();
