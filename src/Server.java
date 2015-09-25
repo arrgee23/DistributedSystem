@@ -54,7 +54,8 @@ public class Server // extends Thread
 
 					catch (Exception e) {
 						System.out.println("Data not found in DHT");
-						out.writeUTF("-1");
+						int i = Integer.MIN_VALUE;
+						out.writeUTF(Integer.toString(i));
 						out.close();
 						in.close();
 					}
