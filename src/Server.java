@@ -1,4 +1,3 @@
-//package assignment;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -12,12 +11,12 @@ public class Server // extends Thread
 {
 	private static final int BASE_SOCKET = 20000;
 	private ServerSocket serverSocket;
-	Hashtable<Integer, Integer> table;
+	public static Hashtable<Integer, Integer> table;
 
 	// initialize server
 	public Server(int port) throws IOException {
 		serverSocket = new ServerSocket(port);
-		serverSocket.setSoTimeout(1000000);
+		serverSocket.setSoTimeout(0);
 		table = new Hashtable<Integer, Integer>();
 	}
 
