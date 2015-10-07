@@ -36,17 +36,19 @@ public class Server // extends Thread
 				
 				// first 3 letters are always put or get
 				String method = incoming.substring(0, 3);
-				int value = Integer.parseInt(incoming.substring(3,incoming.length()));
+				
 				
 				System.out.println("Just received " + incoming);
 
 				if (method.equals("put")) {
+					int value = Integer.parseInt(incoming.substring(3,incoming.length()));
 					table.put(value, value);
 					in.close();
 				} 
 				else if (method.equals("get")) {
 					
 					try {
+						int value = Integer.parseInt(incoming.substring(3,incoming.length()));
 						out.writeUTF(table.get(value).toString());
 						out.close();
 						in.close();
@@ -59,6 +61,9 @@ public class Server // extends Thread
 						out.close();
 						in.close();
 					}
+				}
+				else if(method.equals("see")){
+					
 				}
 
 			} catch (SocketTimeoutException s) {

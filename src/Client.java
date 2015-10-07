@@ -93,13 +93,19 @@ public class Client extends Thread{
 
 			if(method.equals("put"))
 				put(n);
-			else{
+			else if(method.equals("get")){
 				int k = get(n);
 				if(k!= Integer.MIN_VALUE)
 					System.out.println("got: "+k);
 				else
 					System.out.println("NOT FOUND");
 
+			}
+			else if(method.equals("see")){
+				
+			}
+			else{
+				System.out.println("Wrong input format\n"+"Usage: put/get <integer_number>");
 			}
 		}
 	}
